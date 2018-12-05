@@ -9,29 +9,29 @@ struct list {
 
 struct list *init_list(int arr[], int N){
     struct list *list1 = malloc(sizeof(struct list));
-    list1->start = 0;
-    list1->end = N-1;
+    list1->start = &arr[0];
+    list1->end = &arr[N];
     list1->data = arr;
     return list1;
 }
 
-void print_arr(int *pInt, unsigned long i){
-    if(i==0)
-        printf (" []\n");
+void print_arr(int *arr, int N)
+{
+    if (N == 0)
+        printf("[]\n");
     else {
-        printf ("[%d",  pInt[0]) ;
-        int j;
-        for (j = 0; j < i; j ++)
-            printf (", %d",  pInt[i]);
-        printf ("]\n");
-     }
+        printf("[%d", arr[0]);          // Accès au tableau référencé
+
+        int i;
+        for (i = 1; i < N; i++)
+            printf(", %d", arr[i]);     // Accès au tableau référencé
+        printf("]\n");
+    }
 }
 
 void print_list (struct list *list )
 {
-    printf("%d\n",list->end);
-    printf("%d\n",list->start);
-    print_arr (list->data , list->end - list->start + 1);
+    print_arr (list->start , list->end - list->start);
 }
 
 int main (){
